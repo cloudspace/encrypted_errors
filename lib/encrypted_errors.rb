@@ -14,10 +14,10 @@ class EncryptedException
     begin
       @app.call(env)
     rescue Exception => e
-      encrypted_description = e.description.encrypt
+      encrypted_message = e.message.encrypt
       encrypted_backtrace = e.backtrace.encrypt
 
-      new_exception = e.class.new encrypted_description
+      new_exception = e.class.new encrypted_message
       new_exception.set_backtrace = encrypted_backtrace
 
       raise new_exception
